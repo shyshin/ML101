@@ -1,0 +1,46 @@
+def hypo(a,b):
+  h= (a[1] * b[0]) + a[0]
+  return h - b[1]
+def costf(a,b,m):
+  x= (hypo(a,b) ** 2) / (2 * m)
+  return x
+def del1(a,b,m):
+  y= hypo(a,b) / m
+  return y
+def del2(a,b,m):
+  y= (hypo(a,b) * b[0]) / m
+  return y
+def graddes(a,b,m):
+  x= costf(a,b,m)
+  while x >= costf(a,b,m):
+    x= costf(a,b,m)
+    temp0= a[0] - (0.5 * del1(a,b,m))
+    temp1= a[1] - (0.5 * del2(a,b,m))
+    a[0]= temp0
+    a[1]= temp1
+  return a
+def main():
+  m= input("Enter the no. of data sets ")  
+  for i in xrange(m):
+    print "Enter %dth 0= "% (i+1)
+    O= []
+    X= []
+    x= 0
+    for j in xrange(2):
+      a= input()
+      O.append(a)
+    print "Enter %dth X= "% (i+1)
+    for j in xrange(2):
+      g= input()
+      X.append(g)
+    b= X 
+    x= x + costf(O,X,m)
+  print "The cost function is %d" % x
+  print "Enter the initial values for 0"
+  p= []
+  p.append(input())
+  p.append(input())
+  print "The values of 0 is "
+  print graddes(p,b,m)
+if __name__ == '__main__':
+  main()
